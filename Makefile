@@ -6,20 +6,9 @@
 #    By: nchow-yu <nchow-yu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/25 18:56:16 by nchow-yu          #+#    #+#              #
-#    Updated: 2021/12/15 18:33:23 by nchow-yu         ###   ########.fr        #
+#    Updated: 2022/07/22 16:03:28 by nchow-yu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-ifneq (,$(findstring xterm,${TERM}))
-	RED          := $(shell tput -Txterm setaf 1)
-	WHITE        := $(shell tput -Txterm setaf 7)
-	RESET := $(shell tput -Txterm sgr0)
-else
-	RED          := ""
-	WHITE        := ""
-	RESET        := ""
-endif
-
 
 SRCS	=	ft_strlen.c ft_strnstr.c ft_bzero.c ft_calloc.c ft_isascii.c \
 				ft_memmove.c ft_strlcpy.c ft_substr.c ft_isdigit.c ft_memset.c ft_strlen.c \
@@ -41,7 +30,7 @@ all:	${OBJS} ${OBJSBONUS} ${NAME}
 %.o:	%.c
 	${CC} -o $@ -c $< ${CFLAGS}
 
-${NAME}:	title ${OBJS} ${OBJSBONUS}
+${NAME}:	${OBJS} ${OBJSBONUS}
 	ar rcs ${NAME} ${OBJS} ${OBJSBONUS}
 
 bonus:	${OBJS} ${OBJSBONUS}
@@ -54,10 +43,5 @@ fclean:    clean
 	rm -f ${NAME}
 
 re:	fclean ${NAME}
-
-title:
-	@echo "${RED}nchow-yu - Nicole CHOW-YUEN-MIN"
-	@echo "${WHITE}Libft"
-	@echo "${RESET}"
 
 .PHONY:	all clean fclean re
